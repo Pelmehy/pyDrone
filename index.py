@@ -12,7 +12,12 @@ def index():
 
 @app.route('/admin')
 def admin():
-    return render_template('tests/adminLTE.html')
+    return render_template('admin/adminLTE.html')
+
+
+@app.route('/map')
+def map():
+    return render_template('tests/map.html')
 
 
 @app.route('/login')

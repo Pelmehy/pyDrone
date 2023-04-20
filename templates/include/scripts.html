@@ -1,23 +1,32 @@
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
+{# REQUIRED SCRIPTS #}
+{# jQuery #}
 <script src="{{ url_for('static', filename="plugins/jquery/jquery.min.js") }}"></script>
-<!-- Bootstrap -->
+{# Bootstrap #}
 <script src="{{ url_for('static', filename="plugins/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
-<!-- overlayScrollbars -->
+{# overlayScrollbars #}
 <script src="{{ url_for('static', filename="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js") }}"></script>
-<!-- AdminLTE App -->
+{# AdminLTE App #}
 <script src="{{ url_for('static', filename="dist/js/adminlte.js") }}"></script>
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
+{# PAGE PLUGINS #}
+{# jQuery Mapael #}
 <script src="{{ url_for('static', filename="plugins/jquery-mousewheel/jquery.mousewheel.js") }}"></script>
 <script src="{{ url_for('static', filename="plugins/raphael/raphael.min.js") }}"></script>
 <script src="{{ url_for('static', filename="plugins/jquery-mapael/jquery.mapael.min.js") }}"></script>
 <script src="{{ url_for('static', filename="plugins/jquery-mapael/maps/usa_states.min.js") }}"></script>
-<!-- ChartJS -->
+{# ChartJS #}
 <script src="{{ url_for('static', filename="plugins/chart.js/Chart.min.js") }}"></script>
 
-<!-- AdminLTE for demo purposes -->
+{# AdminLTE for demo purposes #}
 <script src="{{ url_for('static', filename="dist/js/demo.js") }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{# AdminLTE dashboard demo (This is only for demo purposes) #}
 <script src="{{ url_for('static', filename="dist/js/pages/dashboard2.js") }}"></script>
+
+{# map scripts#}
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+{#<script src="{{ url_for('static', filename='publick/js/map.js') }}"></script>#}
+
+{# app scripts #}
+<script src="{{ url_for('static', filename='publick/js/app.js') }}"></script>

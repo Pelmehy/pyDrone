@@ -1,16 +1,35 @@
 from flask import *
+from flask_socketio import SocketIO, send
 from markupsafe import escape
 
 app = Flask(__name__)
-app.run(debug=True)
+app.config['SECRET_KEY'] = 'Qj4kn6N7uRAEcCAHh8bZKUqD'
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 
-@app.route('/')
+if __name__ == "__main__":
+    socketio.run(app, host='localhost', debug=True, allow_unsafe_werkzeug=True)
+    # app.run(debug=True)
+
+
+@socketio.on('message')
+def handle_message(message):
+    print("Received: " + message)
+    if message != "User connected!":
+        send(message, broadcast=True)
+
+
+@app.route('/chat')
+def chat():
+    return render_template('tests/chat.html')
+
+
+@app.route('/admin')
 def index():
     return render_template('tests/test.html')
 
 
-@app.route('/admin')
+@app.route('/')
 def admin():
     return render_template('admin/adminLTE.html')
 
@@ -30,8 +49,8 @@ def profile(username):
     return f'{username}\'s profile'
 
 
-with app.test_request_context():
-    print(url_for('index'))
-    print(url_for('login'))
-    print(url_for('login', next='/'))
-    print(url_for('profile', username='John Doe'))
+# with app.test_request_context():
+#     print(url_for('index'))
+#     print(url_for('login'))
+#     print(url_for('login', next='/'))
+#     print(url_for('profile', username='John Doe'))

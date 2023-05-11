@@ -8,6 +8,7 @@
 
 .progress-success {
     background-color: #28a745 !important;
+    transition: none !important;
 }
 
 .sticky {
@@ -22,4 +23,8 @@
 
 .decrease {
     justify-content: end;
+}
+
+.video {
+    height: 300px;
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flask_Chat_App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"
+            integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+<div class="" id="chat">
+
+</div>
+<input type="text" id="username" placeholder="username">
+<input type="text" id="message" placeholder="message">
+<button id="sentBtn">send</button>
+
+<script type="text/javascript">
+    $(function () {
+        let username = $('#username');
+        let message = $('#message');
+        let chat = $('#chat');
+
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        console.log(socket);
+        socket.on('connect', function () {
+            socket.send("User connected!");
+        });
+
+        socket.on('message', function (data) {
+            console.log('message received: ' + data);
+
+            chat.append($('<p>').text(data));
+        });
+
+        $('#sentBtn').on('click', function () {
+            let resultMessage = username.val() + ': ' + message.val();
+
+            socket.send(resultMessage);
+            console.log(resultMessage);
+
+            message.val(' ');
+        })
+    })
+</script>
+
+</body>
+</html>

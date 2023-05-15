@@ -1,11 +1,13 @@
 from flask import *
 from flask_socketio import SocketIO, send
+from flask_cors import CORS, cross_origin
 from markupsafe import escape
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Qj4kn6N7uRAEcCAHh8bZKUqD'
 socketio = SocketIO(app, cors_allowed_origins='*')
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 if __name__ == "__main__":
     socketio.run(app, host='localhost', debug=True, allow_unsafe_werkzeug=True)
@@ -48,6 +50,7 @@ def index():
 
 
 @app.route('/')
+@cross_origin()
 def admin():
     return render_template('admin/adminLTE.html')
 

@@ -208,7 +208,7 @@
                         <!-- TABLE: LATEST ORDERS -->
                         <div class="card">
                             <div class="card-header border-transparent">
-                                <h3 class="card-title">Latest Orders</h3>
+                                <h3 class="card-title">Drone servers</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -225,81 +225,31 @@
                                     <table class="table m-0">
                                         <thead>
                                         <tr>
-                                            <th>Order ID</th>
-                                            <th>Item</th>
+                                            <th>URL</th>
                                             <th>Status</th>
-                                            <th>Popularity</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
+                                            <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
+                                            <td><span class="badge bg-danger" id="connection_status">Disconnected</span></td>
                                             <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                    90,80,90,-70,61,-83,63
-                                                </div>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm" id="drone_connect">connect</button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
+                                            <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
+                                            <td><span class="badge bg-warning">Connecting...</span></td>
                                             <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                    90,80,-90,70,61,-83,68
-                                                </div>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">connect</button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="badge badge-danger">Delivered</span></td>
+                                            <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
+                                            <td><span class="badge badge-success">Connected</span></td>
                                             <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                    90,-80,90,70,-61,83,63
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="badge badge-info">Processing</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                                    90,80,-90,70,-61,83,63
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                    90,80,-90,70,61,-83,68
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="badge badge-danger">Delivered</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                    90,-80,90,70,-61,83,63
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                    90,80,90,-70,61,-83,63
-                                                </div>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">disconnect</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -342,7 +292,7 @@
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <button type="submit" id="take_off"
-                                                                class="btn btn-primary w-100">Take Off
+                                                                class="btn btn-primary w-100" disabled>Take Off
                                                         </button>
                                                     </div>
                                                     <div class="col-3">
@@ -367,7 +317,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-3">
-                                                        <button type="submit" class="btn btn-primary">GPS go to</button>
+                                                        <button type="submit" id="gps_set" class="btn btn-primary">GPS go to</button>
                                                     </div>
                                                     <div class="col-3">
                                                         <input type="text" id="lat_go_to" class="form-control"

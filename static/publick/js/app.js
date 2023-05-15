@@ -151,10 +151,26 @@ $(function () {
 
     var lat = 50.4521213
     var long = 30.4544663
-    var accuracy = 50
+    var accuracy = 10
 
     // Map initialization
     var map = L.map('freeMap').setView([0, 0], 6);
+
+    var droneIcon = L.icon({
+    iconUrl: "static/publick/img/drone.png",
+
+    iconSize:     [20, 20], // size of the icon
+    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    })
+
+    var iconGoTo = L.icon({
+        iconUrl: "static/publick/img/marker-go-to.png",
+
+        iconSize:     [25, 40], // size of the icon
+        iconAnchor:   [10, 40], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    })
 
     //osm layer
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -174,7 +190,7 @@ $(function () {
         // }, 2000);
     }
 
-    var marker, circle, temp_marker;
+    var marker, circle, temp_marker, go_to_marker;
 
     function updatePosition()
     {
@@ -189,7 +205,7 @@ $(function () {
             map.removeLayer(circle)
         }
 
-        marker = L.marker([lat, long])
+        marker = L.marker([lat, long], {icon: droneIcon})
         circle = L.circle([lat, long], {radius: accuracy})
 
         var featureGroup = L.featureGroup([marker, circle]).addTo(map)
@@ -246,47 +262,16 @@ $(function () {
         L.featureGroup([temp_marker]).addTo(map)
     });
 
-    let gps_go_to_controls = $('#gps_go_to_controls');
-    let velocity_controls = $('#velocity_controls');
-    let app_mode = $('#app_mode');
+    $('#gps_set').click(function () {
+        let lat = $('#lat_go_to').val()
+        let lon = $('#lon_go_to').val()
 
-    $('#rtl_mode').click(function () {
-        gps_go_to_controls.hide()
-        velocity_controls.hide()
+        if (go_to_marker) {
+            map.removeLayer(go_to_marker)
+        }
 
-        $('#rtl_mode').attr('disabled', 'disabled');
-        $('#gps_go_to_mode').attr('disabled', 'disabled');
-        $('#velocity_mode').attr('disabled', 'disabled');
+        go_to_marker = L.marker([lat, lon], {icon: iconGoTo})
+        L.featureGroup([go_to_marker]).addTo(map)
 
-        $('#take_off').removeAttr('disabled')
-
-        app_mode.text('RTL')
-    });
-
-    $('#take_off').click(function () {
-        gps_go_to_controls.hide()
-        velocity_controls.hide()
-
-        $('#rtl_mode').removeAttr('disabled');
-        $('#gps_go_to_mode').removeAttr('disabled');
-        $('#velocity_mode').removeAttr('disabled');
-
-        $(this).attr('disabled', 'disabled');
-
-        app_mode.text('Take Off')
-    });
-
-    $('#gps_go_to_mode').click(function () {
-        gps_go_to_controls.show()
-        velocity_controls.hide()
-
-        app_mode.text('GO TO')
-    });
-
-    $('#velocity_mode').click(function () {
-        gps_go_to_controls.hide()
-        velocity_controls.show()
-
-        app_mode.text('VELOCITY')
-    });
+    })
 })

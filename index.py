@@ -19,6 +19,24 @@ def handle_message(message):
         send(message, broadcast=True)
 
 
+@socketio.on('drone_connection')
+def drone_connection(response):
+    print(response)
+    send(response, broadcast=True)
+
+
+@socketio.on('cur_drone_gps')
+def cur_drone_gps(response):
+    print(response)
+    send(response)
+
+
+@socketio.on('drone_settings')
+def drone_settings(response):
+    print(response)
+    send(response)
+
+
 @app.route('/chat')
 def chat():
     return render_template('tests/chat.html')

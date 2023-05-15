@@ -149,9 +149,9 @@ $(function () {
     // map module
     // *****************************
 
-    var lat = 51.45662279999999
-    var long = 31.446970600000004
-    var accuracy = 3504.115577074102
+    var lat = 50.4521213
+    var long = 30.4544663
+    var accuracy = 50
 
     // Map initialization
     var map = L.map('freeMap').setView([0, 0], 6);
@@ -174,12 +174,12 @@ $(function () {
         // }, 2000);
     }
 
-    var marker, circle;
+    var marker, circle, temp_marker;
 
     function updatePosition()
     {
-        lat = lat + 0.001
-        long = long + 0.001
+        // lat = lat + 0.001
+        // long = long + 0.001
 
         if(marker) {
             map.removeLayer(marker)
@@ -233,4 +233,60 @@ $(function () {
         $('#longitude').html(long)
         $('#accuracy').html(accuracy)
     }
+
+    map.on('click', function (e) {
+        $('#lat_go_to').val(e.latlng.lat);
+        $('#lon_go_to').val(e.latlng.lng);
+
+        if (temp_marker) {
+            map.removeLayer(temp_marker)
+        }
+
+        temp_marker = L.marker([e.latlng.lat, e.latlng.lng])
+        L.featureGroup([temp_marker]).addTo(map)
+    });
+
+    let gps_go_to_controls = $('#gps_go_to_controls');
+    let velocity_controls = $('#velocity_controls');
+    let app_mode = $('#app_mode');
+
+    $('#rtl_mode').click(function () {
+        gps_go_to_controls.hide()
+        velocity_controls.hide()
+
+        $('#rtl_mode').attr('disabled', 'disabled');
+        $('#gps_go_to_mode').attr('disabled', 'disabled');
+        $('#velocity_mode').attr('disabled', 'disabled');
+
+        $('#take_off').removeAttr('disabled')
+
+        app_mode.text('RTL')
+    });
+
+    $('#take_off').click(function () {
+        gps_go_to_controls.hide()
+        velocity_controls.hide()
+
+        $('#rtl_mode').removeAttr('disabled');
+        $('#gps_go_to_mode').removeAttr('disabled');
+        $('#velocity_mode').removeAttr('disabled');
+
+        $(this).attr('disabled', 'disabled');
+
+        app_mode.text('Take Off')
+    });
+
+    $('#gps_go_to_mode').click(function () {
+        gps_go_to_controls.show()
+        velocity_controls.hide()
+
+        app_mode.text('GO TO')
+    });
+
+    $('#velocity_mode').click(function () {
+        gps_go_to_controls.hide()
+        velocity_controls.show()
+
+        app_mode.text('VELOCITY')
+    });
 })

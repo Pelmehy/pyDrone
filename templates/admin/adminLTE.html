@@ -125,23 +125,6 @@
                                         <!-- Map will be created here -->
                                         <div id="freeMap" class="map"></div>
                                     </div>
-                                    <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
-                                        <div class="description-block mb-4">
-                                            <h5 class="description-header">latitude:</h5>
-                                            <span class="description-text" id="latitude">00000</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                        <div class="description-block mb-4">
-                                            <h5 class="description-header">longitude:</h5>
-                                            <span class="description-text" id="longitude">00000</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                        <div class="description-block">
-                                            <h5 class="description-header">accuracy:</h5>
-                                            <span class="description-text" id="accuracy">00000</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                    </div><!-- /.card-pane-right -->
                                 </div><!-- /.d-md-flex -->
                             </div>
                             <!-- /.card-body -->
@@ -165,8 +148,56 @@
                             <div class="card-body p-0">
                                 <div class="d-md-flex">
                                     <div class="p-1 flex-fill" style="overflow: hidden">
-                                        <!-- Map will be created here -->
-                                        <div id="freeMap" class="map"></div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="card-body">
+                                                    <table class="table w-100">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>Connection</th>
+                                                            <td class="text-center"><span class="badge bg-danger">Disconnected</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Arm</th>
+                                                            <td class="text-center"><span class="badge bg-warning">False</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Is took off</th>
+                                                            <td class="text-center"><span class="badge bg-warning">False</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Ground speed</th>
+                                                            <td class="text-center"><span class="badge bg-success">5.00</span></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="card-body">
+                                                    <table class="table w-100">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>Latitude</th>
+                                                            <td class="text-center"><span class="badge bg-primary" id="latitude">55</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Longitude</th>
+                                                            <td class="text-center"><span class="badge bg-primary" id="longitude">70</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Altitude</th>
+                                                            <td class="text-center"><span class="badge bg-primary" id="accuracy">30</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>APP mode</th>
+                                                            <td class="text-center"><span class="badge bg-success" id="app_mode">RTL</span></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- /.d-md-flex -->
                             </div>
@@ -289,112 +320,173 @@
                     <!-- /.col -->
 
                     <div class="col-md-4">
-                        <div class="card sticky">
-                            <div class="card-header">
-                                <h3 class="card-title">Controls</h3>
+                        <div class="sticky">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Modes</h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
+                                <!-- /.card-header -->
+                                <div class="card-footer p-0">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <button type="submit" id="take_off"
+                                                                class="btn btn-primary w-100">Take Off
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="submit" id="rtl_mode"
+                                                                class="btn btn-primary w-100" disabled>RTL
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="submit" id="gps_go_to_mode"
+                                                                class="btn btn-primary w-100" disabled>GPS go to
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="submit" id="velocity_mode"
+                                                                class="btn btn-primary w-100" disabled>Velocity
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item" id="gps_go_to_controls" style="display: none">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <button type="submit" class="btn btn-primary">GPS go to</button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="text" id="lat_go_to" class="form-control"
+                                                               placeholder="lat">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="text" id="lon_go_to" class="form-control"
+                                                               placeholder="lon">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="text" id="alt_go_to" class="form-control"
+                                                               placeholder="alt" value="10">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-pills flex-column" id="velocity_controls" style="display: none">
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                Roll
+
+                                                <div class="row">
+                                                    <div class="col-6 mr-0 pr-0">
+                                                        <div class="progress decrease border-0">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="roll-progress-decrease" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 ml-0 pl-0 border-0">
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="roll-progress-increase" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <span class="float-right text-warning" id="roll">
+                                                0%
+                                            </span>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                Yaw
+
+                                                <div class="row">
+                                                    <div class="col-6 mr-0 pr-0">
+                                                        <div class="progress decrease border-0">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="yaw-progress-decrease" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 ml-0 pl-0 border-0">
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="yaw-progress-increase" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="float-right text-warning" id="yaw">
+                                                0%
+                                            </span>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                Pinch
+
+                                                <div class="row">
+                                                    <div class="col-6 mr-0 pr-0">
+                                                        <div class="progress decrease border-0">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="pinch-progress-decrease" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 ml-0 pl-0 border-0">
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="pinch-progress-increase" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="float-right text-warning" id="pinch">
+                                                0%
+                                            </span>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                Throttle
+
+                                                <div class="row">
+                                                    <div class="col-6 mr-0 pr-0">
+                                                        <div class="progress decrease border-0">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="throttle-progress-decrease"
+                                                                 style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 ml-0 pl-0 border-0">
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-success"
+                                                                 id="throttle-progress-increase"
+                                                                 style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="float-right text-warning" id="throttle">
+                                                0%
+                                            </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.footer -->
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-footer p-0">
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item">
-                                        <div class="nav-link">
-                                            Roll
-
-                                            <div class="row">
-                                                <div class="col-6 mr-0 pr-0">
-                                                    <div class="progress decrease border-0">
-                                                        <div class="progress-bar progress-success" id="roll-progress-decrease" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 ml-0 pl-0 border-0">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-success" id="roll-progress-increase" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <span class="float-right text-warning" id="roll">
-                                                0%
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="nav-link">
-                                            Yaw
-
-                                            <div class="row">
-                                                <div class="col-6 mr-0 pr-0">
-                                                    <div class="progress decrease border-0">
-                                                        <div class="progress-bar progress-success" id="yaw-progress-decrease" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 ml-0 pl-0 border-0">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-success" id="yaw-progress-increase" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="float-right text-warning" id="yaw">
-                                                0%
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="nav-link">
-                                            Pinch
-
-                                            <div class="row">
-                                                <div class="col-6 mr-0 pr-0">
-                                                    <div class="progress decrease border-0">
-                                                        <div class="progress-bar progress-success" id="pinch-progress-decrease" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 ml-0 pl-0 border-0">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-success" id="pinch-progress-increase" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="float-right text-warning" id="pinch">
-                                                0%
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="nav-link">
-                                            Throttle
-
-                                            <div class="row">
-                                                <div class="col-6 mr-0 pr-0">
-                                                    <div class="progress decrease border-0">
-                                                        <div class="progress-bar progress-success" id="throttle-progress-decrease" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 ml-0 pl-0 border-0">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-success" id="throttle-progress-increase" style="width: 0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="float-right text-warning" id="throttle">
-                                                0%
-                                            </span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.footer -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
                     <!-- /.col -->
                 </div>

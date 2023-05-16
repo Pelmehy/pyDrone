@@ -304,7 +304,8 @@ $(function () {
         postfix: 'm/s',
         prettify: false,
         hasGrid: true,
-        fixMiddle: true
+        fixMiddle: true,
+        skin: 'flat'
     })
 
     $('#range_4').ionRangeSlider({

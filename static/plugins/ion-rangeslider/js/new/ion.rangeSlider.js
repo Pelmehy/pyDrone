@@ -120,7 +120,7 @@
 
     var single_html =
         '<span class="irs-shadow shadow-single"></span>' +
-        '<span class="irs-slider single"></span>';
+        '<span class="irs-slider irs-handle single"><i></i><i></i><i></i></span>';
 
     var single_edge =
         '<span class="irs-bar-edge"></span>';

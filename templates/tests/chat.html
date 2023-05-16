@@ -24,7 +24,7 @@
         let message = $('#message');
         let chat = $('#chat');
 
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var socket = io.connect('http://127.0.0.1:5000');
         console.log(socket);
         socket.on('connect', function () {
             socket.send("User connected!");

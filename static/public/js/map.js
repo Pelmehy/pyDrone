@@ -81,6 +81,6 @@ $(function () {
     {
         $('#latitude').html(lat)
         $('#longitude').html(long)
-        $('#accuracy').html(accuracy)
+        $('#altitude').html(accuracy)
     }
 })

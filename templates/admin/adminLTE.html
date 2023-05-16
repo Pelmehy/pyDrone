@@ -155,19 +155,27 @@
                                                         <tbody>
                                                         <tr>
                                                             <th>Connection</th>
-                                                            <td class="text-center"><span class="badge bg-danger">Disconnected</span></td>
+                                                            <td class="text-center"><span class="badge bg-danger"
+                                                                                          id="socket_connection">Disconnected</span>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th>Arm</th>
-                                                            <td class="text-center"><span class="badge bg-warning">False</span></td>
+                                                            <td class="text-center"><span class="badge bg-warning"
+                                                                                          id="socket_arm">False</span>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th>Is took off</th>
-                                                            <td class="text-center"><span class="badge bg-warning">False</span></td>
+                                                            <td class="text-center"><span class="badge bg-warning"
+                                                                                          id="socket_took_off">False</span>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <th>Ground speed</th>
-                                                            <td class="text-center"><span class="badge bg-success">5.00</span></td>
+                                                            <td class="text-center"><span class="badge bg-success"
+                                                                                          id="socket_ground_speed">5.00</span>
+                                                            </td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -179,19 +187,23 @@
                                                         <tbody>
                                                         <tr>
                                                             <th>Latitude</th>
-                                                            <td class="text-center"><span class="badge bg-primary" id="latitude">55</span></td>
+                                                            <td class="text-center"><span class="badge bg-primary"
+                                                                                          id="latitude">55</span></td>
                                                         </tr>
                                                         <tr>
                                                             <th>Longitude</th>
-                                                            <td class="text-center"><span class="badge bg-primary" id="longitude">70</span></td>
+                                                            <td class="text-center"><span class="badge bg-primary"
+                                                                                          id="longitude">70</span></td>
                                                         </tr>
                                                         <tr>
                                                             <th>Altitude</th>
-                                                            <td class="text-center"><span class="badge bg-primary" id="accuracy">30</span></td>
+                                                            <td class="text-center"><span class="badge bg-primary"
+                                                                                          id="altitude">30</span></td>
                                                         </tr>
                                                         <tr>
                                                             <th>APP mode</th>
-                                                            <td class="text-center"><span class="badge bg-success" id="app_mode">RTL</span></td>
+                                                            <td class="text-center"><span class="badge bg-success"
+                                                                                          id="app_mode">RTL</span></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -233,23 +245,30 @@
                                         <tbody>
                                         <tr>
                                             <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
-                                            <td><span class="badge bg-danger" id="connection_status">Disconnected</span></td>
+                                            <td><span class="badge bg-danger" id="connection_status">Disconnected</span>
+                                            </td>
                                             <td>
-                                                <button type="button" class="btn btn-block btn-outline-success btn-sm" id="drone_connect">connect</button>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm"
+                                                        id="drone_connect">connect
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
                                             <td><span class="badge bg-warning">Connecting...</span></td>
                                             <td>
-                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">connect</button>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">
+                                                    connect
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
                                             <td><span class="badge badge-success">Connected</span></td>
                                             <td>
-                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">disconnect</button>
+                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">
+                                                    disconnect
+                                                </button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -313,11 +332,13 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="nav-item" id="gps_go_to_controls" style="display: none">
+                                        <li class="nav-item" id="gps_go_to_controls" {# style="display: none" #}>
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-3">
-                                                        <button type="submit" id="gps_set" class="btn btn-primary">GPS go to</button>
+                                                        <button type="submit" id="gps_set" class="btn btn-primary">GPS
+                                                            go to
+                                                        </button>
                                                     </div>
                                                     <div class="col-3">
                                                         <input type="text" id="lat_go_to" class="form-control"
@@ -333,6 +354,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item col-sm-6">
+                                            <div class=>
+                                                <input id="range_5" type="text" name="range_6" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span class="irs-line" tabindex="0"></span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span class="irs-line" tabindex="0"></span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span class="irs-line" tabindex="0"></span>
                                         </li>
                                     </ul>
                                     <ul class="nav nav-pills flex-column" id="velocity_controls" style="display: none">

@@ -54,10 +54,12 @@ $(function () {
     let velocity_controls = $('#velocity_controls');
     let app_mode = $('#app_mode');
 
-    function connect() {
-        // set_mode(drone_connect_url)
+    let connection_status = $('#connection_status')
 
-        let connection_status = $('#connection_status')
+
+    function connect() {
+        set_mode(drone_connect_url)
+
         connection_status.removeClass('bg-danger')
         connection_status.addClass('bg-warning')
         connection_status.text('Connecting...')
@@ -67,22 +69,26 @@ $(function () {
     }
 
     function disconnect() {
-        // set_mode(drone_disconnect_url)
+        set_mode(drone_disconnect_url)
 
-        let connection_status = $('#connection_status')
         connection_status.removeClass('bg-warning')
         connection_status.addClass('bg-danger')
-        connection_status.text('Connect')
+        connection_status.text('Disconnected')
 
         $('#take_off').attr('disabled', 'disabled');
         $('#rtl_mode').attr('disabled', 'disabled');
         $('#gps_go_to_mode').attr('disabled', 'disabled');
         $('#velocity_mode').attr('disabled', 'disabled');
 
-        $('#drone_connect').text('disconnect')
+        $('#drone_connect').text('connect')
 
         gps_go_to_controls.hide()
         velocity_controls.hide()
+
+        let socket_connection = $('#socket_connection')
+        socket_connection.text('False')
+        socket_connection.removeClass('badge-success')
+        socket_connection.addClass('bg-danger')
     }
 
     $('#drone_connect').click(function () {
@@ -148,4 +154,8 @@ $(function () {
 
         set_gps(lat, lon, alt)
     })
+
+    $(window).on("beforeunload", function() {
+        disconnect()
+    });
 })

@@ -50,7 +50,7 @@ $(function () {
         }
     })
 
-    function changeControls(control, name, increase = true, ) {
+    function changeControls(control, name, increase = true,) {
         let controlBarDecrease = $('#' + name + '-progress-decrease');
         let controlBarIncrease = $('#' + name + '-progress-increase');
         let controlPercent = $('#' + name);
@@ -86,7 +86,7 @@ $(function () {
     function changeX(increase = true) {
         let rollControl = $('#roll');
         let yawControl = $('#yaw');
-        
+
         if (increase) {
             roll += roll < 100 ? 1 : 0;
             yaw = 0;
@@ -157,19 +157,19 @@ $(function () {
     var map = L.map('freeMap').setView([0, 0], 6);
 
     var droneIcon = L.icon({
-    iconUrl: "static/publick/img/drone.png",
+        iconUrl: "static/public/img/drone.png",
 
-    iconSize:     [20, 20], // size of the icon
-    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [20, 20], // size of the icon
+        iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     })
 
     var iconGoTo = L.icon({
-        iconUrl: "static/publick/img/marker-go-to.png",
+        iconUrl: "static/public/img/marker-go-to.png",
 
-        iconSize:     [25, 40], // size of the icon
-        iconAnchor:   [10, 40], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [25, 40], // size of the icon
+        iconAnchor: [10, 40], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     })
 
     //osm layer
@@ -178,7 +178,7 @@ $(function () {
     });
     osm.addTo(map);
 
-    if(!navigator.geolocation) {
+    if (!navigator.geolocation) {
         console.log("Your browser doesn't support geolocation feature!")
     } else {
         // navigator.geolocation.getCurrentPosition(getPosition)
@@ -192,16 +192,15 @@ $(function () {
 
     var marker, circle, temp_marker, go_to_marker;
 
-    function updatePosition()
-    {
+    function updatePosition() {
         // lat = lat + 0.001
         // long = long + 0.001
 
-        if(marker) {
+        if (marker) {
             map.removeLayer(marker)
         }
 
-        if(circle) {
+        if (circle) {
             map.removeLayer(circle)
         }
 
@@ -214,20 +213,20 @@ $(function () {
 
         updateCoords()
 
-        console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
+        console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
     }
 
-    function getPosition(position){
+    function getPosition(position) {
         // console.log(position)
         lat = position.coords.latitude
         long = position.coords.longitude
         accuracy = position.coords.accuracy
 
-        if(marker) {
+        if (marker) {
             map.removeLayer(marker)
         }
 
-        if(circle) {
+        if (circle) {
             map.removeLayer(circle)
         }
 
@@ -239,15 +238,13 @@ $(function () {
         map.fitBounds(featureGroup.getBounds())
 
 
-
-        console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
+        console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
     }
 
-    function updateCoords()
-    {
+    function updateCoords() {
         $('#latitude').html(lat)
         $('#longitude').html(long)
-        $('#accuracy').html(accuracy)
+        $('#altitude').html(accuracy)
     }
 
     map.on('click', function (e) {
@@ -273,5 +270,66 @@ $(function () {
         go_to_marker = L.marker([lat, lon], {icon: iconGoTo})
         L.featureGroup([go_to_marker]).addTo(map)
 
+    })
+
+    /* ION SLIDER */
+    $('#range_1').ionRangeSlider({
+        min: 0,
+        max: 5000,
+        from: 1000,
+        to: 4000,
+        type: 'double',
+        step: 1,
+        prefix: '$',
+        prettify: false,
+        hasGrid: true
+    })
+    $('#range_2').ionRangeSlider()
+
+    $('#range_5').ionRangeSlider({
+        min: 0,
+        max: 10,
+        type: 'single',
+        step: 0.1,
+        postfix: ' mm',
+        prettify: false,
+        hasGrid: true
+    })
+    $('#range_6').ionRangeSlider({
+        min: -20,
+        max: 20,
+        from: 0,
+        type: 'single',
+        step: 0.1,
+        postfix: 'm/s',
+        prettify: false,
+        hasGrid: true,
+        fixMiddle: true
+    })
+
+    $('#range_4').ionRangeSlider({
+        type: 'single',
+        step: 100,
+        postfix: ' light years',
+        from: 55000,
+        hideMinMax: true,
+        hideFromTo: false
+    })
+    $('#range_3').ionRangeSlider({
+        type: 'double',
+        postfix: ' miles',
+        step: 10000,
+        from: 25000000,
+        to: 35000000,
+        onChange: function (obj) {
+            var t = ''
+            for (var prop in obj) {
+                t += prop + ': ' + obj[prop] + '\r\n'
+            }
+            $('#result').html(t)
+        },
+        onLoad: function (obj) {
+            //
+        }
     })
 })

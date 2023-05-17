@@ -16,7 +16,7 @@ $(function () {
         console.log("Your browser doesn't support geolocation feature!")
     } else {
         // navigator.geolocation.getCurrentPosition(getPosition)
-        updatePosition()
+        // updatePosition()
 
         // setInterval(() => {
         //     //navigator.geolocation.getCurrentPosition(updatePosition)
@@ -46,8 +46,6 @@ $(function () {
 
         map.fitBounds(featureGroup.getBounds())
 
-        updateCoords()
-
         console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
     }
 
@@ -75,12 +73,5 @@ $(function () {
 
 
         console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
-    }
-
-    function updateCoords()
-    {
-        $('#latitude').html(lat)
-        $('#longitude').html(long)
-        $('#altitude').html(accuracy)
     }
 })

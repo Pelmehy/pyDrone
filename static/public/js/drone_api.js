@@ -3,14 +3,14 @@ $(function () {
 
     let server_url= 'http://127.0.0.1:8000'
 
-    let drone_connect_url = server_url + '/drone-api/controls/connect/'
-    let drone_disconnect_url = server_url + '/drone-api/controls/disconnect/'
+    let drone_connect_url = server_url + '/drone-api/controls/connect'
+    let drone_disconnect_url = server_url + '/drone-api/controls/disconnect'
 
     let drone_take_off_mode_url = server_url + '/drone-api/controls/take_off'
     let drone_rtl_mode_url = server_url + '/drone-api/controls/landing_mode'
 
     let drone_velocity_mode_url = server_url + '/drone-api/controls/velocity_mode'
-    let drone_velocity_url = server_url + '/set_velocity'
+    let drone_velocity_url = server_url + '/drone-api/controls/set_velocity'
     let drone_set_x_speed = server_url + '/drone-api/controls/x_speed/'
     let drone_set_y_speed = server_url + '/drone-api/controls/y_speed/'
     let drone_set_z_speed = server_url + '/drone-api/controls/z_speed/'
@@ -19,9 +19,8 @@ $(function () {
     let drone_go_to_mode = server_url + '/drone-api/controls/go_to_mode'
     let drone_gps_set = server_url + '/drone-api/controls/gps_set/'
 
-    function send_post(url) {
+    function send_command(url) {
         console.log(url)
-        let result
 
         $.ajax({
             type: "POST",
@@ -30,24 +29,30 @@ $(function () {
                 console.log(data)
             }
         })
-
-        return result
     }
 
-    function set_mode(url) {
-        return send_post(url)
-    }
+    let vx = $('#vx')
+    let vy = $('#vy')
+    let vz = $('#vz')
+    let yaw = $('#yaw')
 
-    function set_velocity(vx=0.0, vy=0.0, vz=0.0, yaw=0.0) {
-        let api_url = drone_velocity_url + vx + '/' + vy + '/' + vz + '/' + yaw;
+    function set_velocity() {
+        let vx_val = vx.val()
+        let vy_val = vy.val()
+        let vz_val = vz.val()
+        let yaw_val = yaw.val()
 
-        return send_post(api_url)
+        console.log(yaw_val)
+
+        let api_url = drone_velocity_url + '/' + vx_val + '/' + vy_val + '/' + vz_val + '/' + yaw_val;
+
+        return send_command(api_url)
     }
 
     function set_gps(lat, lon, alt) {
         let api_url = drone_gps_set + lat + '/' + lon + '/' + alt
 
-        return send_post(api_url)
+        return send_command(api_url)
     }
 
     let gps_go_to_controls = $('#gps_go_to_controls');
@@ -58,7 +63,7 @@ $(function () {
 
 
     function connect() {
-        set_mode(drone_connect_url)
+        send_command(drone_connect_url)
 
         connection_status.removeClass('bg-danger')
         connection_status.addClass('bg-warning')
@@ -69,7 +74,7 @@ $(function () {
     }
 
     function disconnect() {
-        set_mode(drone_disconnect_url)
+        send_command(drone_disconnect_url)
 
         connection_status.removeClass('bg-warning')
         connection_status.addClass('bg-danger')
@@ -102,7 +107,7 @@ $(function () {
     })
 
     $('#rtl_mode').click(function () {
-        set_mode(drone_rtl_mode_url)
+        send_command(drone_rtl_mode_url)
 
         gps_go_to_controls.hide()
         velocity_controls.hide()
@@ -117,7 +122,7 @@ $(function () {
     });
 
     $('#take_off').click(function () {
-        set_mode(drone_take_off_mode_url)
+        send_command(drone_take_off_mode_url)
         gps_go_to_controls.hide()
         velocity_controls.hide()
 
@@ -131,8 +136,6 @@ $(function () {
     });
 
     $('#gps_go_to_mode').click(function () {
-        set_mode(drone_go_to_mode)
-
         gps_go_to_controls.show()
         velocity_controls.hide()
 
@@ -140,7 +143,7 @@ $(function () {
     });
 
     $('#velocity_mode').click(function () {
-        set_mode(drone_velocity_mode_url)
+        send_command(drone_velocity_mode_url)
         gps_go_to_controls.hide()
         velocity_controls.show()
 
@@ -153,6 +156,23 @@ $(function () {
         let alt = $('#alt_go_to').val()
 
         set_gps(lat, lon, alt)
+        send_command(drone_go_to_mode)
+    })
+
+    vx.change(function () {
+        set_velocity()
+    })
+
+    vy.change(function () {
+        set_velocity()
+    })
+
+    vz.change(function () {
+        set_velocity()
+    })
+
+    yaw.change(function () {
+        set_velocity()
     })
 
     $(window).on("beforeunload", function() {

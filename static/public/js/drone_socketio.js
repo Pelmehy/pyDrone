@@ -27,9 +27,15 @@ $(function () {
     socket.on('cur_drone_gps', function (data) {
         console.log(data)
 
-        $('#latitude').text(data.lat)
-        $('#longitude').text(data.lon)
-        $('#altitude').text(data.alt)
+        $('#latitude').text(data.cur_lat)
+        $('#longitude').text(data.cur_lon)
+        $('#altitude').text(data.cur_alt)
+
+        let degrees = Math.round(data.yaw * (180/3.14))
+
+        $('#gps_yaw').val(degrees)
+
+        $('#latitude').trigger('gps_update', ['Custom', 'Event'])
     })
 
     socket.on('drone_settings', function (data) {

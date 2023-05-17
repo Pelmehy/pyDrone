@@ -261,6 +261,7 @@
 
         // default config
         config = {
+            skin: "flat",
             type: "single",
 
             min: 10,
@@ -326,6 +327,7 @@
 
         // config from data-attributes extends js config
         config_from_data = {
+            skin: $inp.data("skin"),
             type: $inp.data("type"),
 
             min: $inp.data("min"),
@@ -487,7 +489,7 @@
          * Appends slider template to a DOM
          */
         append: function () {
-            var container_html = '<span class="irs js-irs-' + this.plugin_count + '"></span>';
+            var container_html = '<span class="irs irs--' + this.options.skin + ' js-irs-' + this.plugin_count + '"></span>';
             this.$cache.input.before(container_html);
             this.$cache.input.prop("readonly", true);
             this.$cache.cont = this.$cache.input.prev();
@@ -575,6 +577,7 @@
             switch (target) {
                 case "single":
                     this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords.p_single_fake);
+                    this.$cache.s_single.addClass("state_hover");
                     break;
                 case "from":
                     this.coords.p_gap = this.toFixed(this.coords.p_pointer - this.coords.p_from_fake);

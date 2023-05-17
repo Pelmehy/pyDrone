@@ -151,18 +151,27 @@ $(function () {
 
     var lat = 50.4521213
     var long = 30.4544663
-    var accuracy = 10
+    var accuracy = 20
+    let is_new = true
+
+    let cur_yaw = 0
 
     // Map initialization
-    var map = L.map('freeMap').setView([0, 0], 6);
+    var map = L.map('freeMap').setView([0, 0], 5);
 
     var droneIcon = L.icon({
         iconUrl: "static/public/img/drone.png",
 
-        iconSize: [20, 20], // size of the icon
-        iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [20, 20], // point of the icon which will correspond to marker's location
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     })
+
+    let options = {
+        draggable: true,
+        rotationAngle: $('#gps_yaw').val(),
+        icon: droneIcon
+    }
 
     var iconGoTo = L.icon({
         iconUrl: "static/public/img/marker-go-to.png",
@@ -178,74 +187,50 @@ $(function () {
     });
     osm.addTo(map);
 
-    if (!navigator.geolocation) {
-        console.log("Your browser doesn't support geolocation feature!")
-    } else {
-        // navigator.geolocation.getCurrentPosition(getPosition)
+    $('#latitude').on('gps_update', function () {
+        console.log('position updated')
         updatePosition()
+        is_new = false
+    })
+    // navigator.geolocation.getCurrentPosition(getPosition)
 
-        // setInterval(() => {
-        //     //navigator.geolocation.getCurrentPosition(updatePosition)
-        //     updatePosition()
-        // }, 2000);
-    }
+    // setInterval(() => {
+    //     //navigator.geolocation.getCurrentPosition(updatePosition)
+    //     updatePosition()
+    // }, 2000);
+
 
     var marker, circle, temp_marker, go_to_marker;
 
     function updatePosition() {
-        // lat = lat + 0.001
-        // long = long + 0.001
+        lat = $('#latitude').text()
+        long = $('#longitude').text()
 
         if (marker) {
             map.removeLayer(marker)
         }
 
-        if (circle) {
-            map.removeLayer(circle)
+        // if (circle) {
+        //     map.removeLayer(circle)
+        // }
+
+        let map_components = []
+        options.rotationAngle = $('#gps_yaw').val()
+        console.log(options)
+        marker = L.marker([lat, long], options)
+
+        map_components.push(marker)
+        if (is_new) {
+            circle = L.circle([lat, long], {radius: accuracy})
+            map_components.push(circle)
         }
 
-        marker = L.marker([lat, long], {icon: droneIcon})
-        circle = L.circle([lat, long], {radius: accuracy})
-
-        var featureGroup = L.featureGroup([marker, circle]).addTo(map)
+        var featureGroup = L.featureGroup(map_components).addTo(map)
 
         map.fitBounds(featureGroup.getBounds())
-
-        updateCoords()
-
-        console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
     }
 
-    function getPosition(position) {
-        // console.log(position)
-        lat = position.coords.latitude
-        long = position.coords.longitude
-        accuracy = position.coords.accuracy
-
-        if (marker) {
-            map.removeLayer(marker)
-        }
-
-        if (circle) {
-            map.removeLayer(circle)
-        }
-
-        marker = L.marker([lat, long])
-        circle = L.circle([lat, long], {radius: accuracy})
-
-        var featureGroup = L.featureGroup([marker, circle]).addTo(map)
-
-        map.fitBounds(featureGroup.getBounds())
-
-
-        console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
-    }
-
-    function updateCoords() {
-        $('#latitude').html(lat)
-        $('#longitude').html(long)
-        $('#altitude').html(accuracy)
-    }
+    updatePosition()
 
     map.on('click', function (e) {
         $('#lat_go_to').val(e.latlng.lat);

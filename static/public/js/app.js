@@ -230,8 +230,6 @@ $(function () {
         map.fitBounds(featureGroup.getBounds())
     }
 
-    updatePosition()
-
     map.on('click', function (e) {
         $('#lat_go_to').val(e.latlng.lat);
         $('#lon_go_to').val(e.latlng.lng);
@@ -263,7 +261,7 @@ $(function () {
         max: 20,
         from: 0,
         type: 'single',
-        step: 0.1,
+        step: 1,
         postfix: 'm/s',
         prettify: false,
         hasGrid: true,
@@ -276,7 +274,7 @@ $(function () {
         max: 20,
         from: 0,
         type: 'single',
-        step: 0.1,
+        step: 1,
         postfix: 'm/s',
         prettify: false,
         hasGrid: true,
@@ -289,7 +287,7 @@ $(function () {
         max: 20,
         from: 0,
         type: 'single',
-        step: 0.1,
+        step: 1,
         postfix: 'm/s',
         prettify: false,
         hasGrid: true,

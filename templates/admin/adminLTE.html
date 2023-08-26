@@ -86,12 +86,6 @@
                     <div class="col-sm-6">
                         <h1 class="m-0">Drone Dashboard</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v2</li>
-                        </ol>
-                    </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -254,24 +248,6 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
-                                            <td><span class="badge bg-warning">Connecting...</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">
-                                                    connect
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000</a></td>
-                                            <td><span class="badge badge-success">Connected</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-success btn-sm">
-                                                    disconnect
-                                                </button>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -279,9 +255,9 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                    Orders</a>
+{#                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>#}
+{#                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All#}
+{#                                    Orders</a>#}
                             </div>
                             <!-- /.card-footer -->
                         </div>
@@ -310,22 +286,22 @@
                                         <li class="nav-item">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-6 mt-3">
                                                         <button type="submit" id="take_off"
                                                                 class="btn btn-primary w-100" disabled>Take Off
                                                         </button>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-6 mt-3">
                                                         <button type="submit" id="rtl_mode"
                                                                 class="btn btn-primary w-100" disabled>RTL
                                                         </button>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-6 mt-3">
                                                         <button type="submit" id="gps_go_to_mode"
                                                                 class="btn btn-primary w-100" disabled>GPS go to
                                                         </button>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-6 mt-3">
                                                         <button type="submit" id="velocity_mode"
                                                                 class="btn btn-primary w-100" disabled>Velocity
                                                         </button>
@@ -336,20 +312,20 @@
                                         <li class="nav-item" id="gps_go_to_controls" style="display: none">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-3">
-                                                        <button type="submit" id="gps_set" class="btn btn-primary">GPS
+                                                    <div class="col-xl-3 col-12 mt-3">
+                                                        <button type="submit" id="gps_set" class="btn btn-primary w-100">GPS
                                                             go to
                                                         </button>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-4 mt-3">
                                                         <input type="text" id="lat_go_to" class="form-control"
                                                                placeholder="lat">
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-4 mt-3">
                                                         <input type="text" id="lon_go_to" class="form-control"
                                                                placeholder="lon">
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-xl-3 col-4 mt-3">
                                                         <input type="text" id="alt_go_to" class="form-control"
                                                                placeholder="alt" value="10">
                                                     </div>
